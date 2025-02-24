@@ -1,4 +1,4 @@
-package main.java.com.example.demo;
+package com.example.demo;
 
 /**
  * Represents a playing card. A playing card has a number (face) between

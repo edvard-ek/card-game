@@ -1,14 +1,13 @@
-package main.java.com.example.demo;
+package com.example.demo;
 
-import java.util.HashSet;
-import java.util.Random;
+import java.util.*;
 
 public class DeckOfCards {
 
-    private final Set<> deck;
+    private final List<PlayingCard> deck;
 
     public DeckOfCards() {
-        this.deck = new HashSet<>();
+        this.deck = new ArrayList<>();
 
         char[] suits = {'S', 'H', 'D', 'C'};
         for (char suit : suits) {
@@ -29,7 +28,7 @@ public class DeckOfCards {
         return hand;
     }
 
-    public Set<PlayingCard> getDeck() {
+    public List<PlayingCard> getDeck() {
         return deck;
     }
 }
