@@ -1,4 +1,4 @@
-com/example/demo/PlayingCard.class
 com/example/demo/Main.class
-com/example/demo/HandOfCards.class
-com/example/demo/DeckOfCards.class
+com/example/demo/models/DeckOfCards.class
+com/example/demo/models/HandOfCards.class
+com/example/demo/models/PlayingCard.class
