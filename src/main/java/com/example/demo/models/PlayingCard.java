@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.models;
 
 /**
  * Represents a playing card. A playing card has a number (face) between
