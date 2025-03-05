@@ -22,6 +22,8 @@ public class GameBoard extends Application {
     private ListView<String> handView;
     private Label hearts;
     private Label sumFaces;
+    private Label flush;
+    private Label spadeQueen;
 
     public static void main(String[] args) {
         launch(args);
@@ -42,9 +44,10 @@ public class GameBoard extends Application {
         checkHandButton.setOnAction(e -> checkHand());
 
         sumFaces = new Label("Sum of faces: 0");
-        hearts = new Label("Cards of heart: ");
-        HBox checks = new HBox(10, sumFaces, hearts);
-
+        hearts = new Label("Cards of heart: 0");
+        flush = new Label("Flush: Yes/No");
+        spadeQueen = new Label("Queen of spades: Yes/No");
+        HBox checks = new HBox(10, sumFaces, hearts, flush, spadeQueen);
 
         VBox layout = new VBox(10, messageLabel, dealButton, checkHandButton, handView, checks);
         layout.setStyle("-fx-padding: 20; -fx-alignment: center;");
@@ -77,6 +80,14 @@ public class GameBoard extends Application {
         for (PlayingCard card : hand.checkHearts()) {
             heartsAsString.append(card.getAsString()).append(" ");
         }
+        if (hand.checkFlush()) {
+            flush.setText("Flush: Yes");
+        }
+        if (hand.checkQueenOfSpades()) {
+            spadeQueen.setText("Queen of spades: Yes");
+        }
+        spadeQueen.setText("Queen of spades: No");
+        flush.setText("Flush: No");
         hearts.setText("Cards of heart: " + heartsAsString);
         sumFaces.setText("Sum of faces: " + hand.checkPoints());
     }

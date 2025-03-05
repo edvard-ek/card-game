@@ -1,9 +1,6 @@
 package com.example.demo.models;
 
-import com.example.demo.models.PlayingCard;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class HandOfCards {
@@ -43,5 +40,19 @@ public class HandOfCards {
             }
         }
         return false;
+    }
+
+    public boolean checkFlush() {
+       if (hand.size() < 5) {
+           return false;
+       }
+
+       char suit = hand.get(0).getSuit();
+       for (int i = 1; i < hand.size(); i++) {
+           if (hand.get(i).getSuit() != suit) {
+               return false;
+           }
+       }
+       return true;
     }
 }
