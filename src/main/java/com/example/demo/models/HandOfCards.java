@@ -3,6 +3,7 @@ package com.example.demo.models;
 import com.example.demo.models.PlayingCard;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class HandOfCards {
@@ -23,5 +24,15 @@ public class HandOfCards {
             sumPoints += card.getFace();
         }
         return sumPoints;
+    }
+
+    public ArrayList<PlayingCard> checkHearts() {
+        ArrayList<PlayingCard> hearts = new ArrayList<>();
+        for (PlayingCard card : hand) {
+            if (card.getSuit() == 'H') {
+                hearts.add(card);
+            }
+        }
+        return hearts;
     }
 }
