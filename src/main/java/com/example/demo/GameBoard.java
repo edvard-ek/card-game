@@ -20,7 +20,7 @@ public class GameBoard extends Application {
     private HandOfCards hand;
     private Label messageLabel;
     private ListView<String> handView;
-    private Label points;
+    private Label hearts;
     private Label sumFaces;
 
     public static void main(String[] args) {
@@ -42,10 +42,9 @@ public class GameBoard extends Application {
         checkHandButton.setOnAction(e -> checkHand());
 
         sumFaces = new Label("Sum of faces: 0");
-        HBox sums = new HBox(10, sumFaces);
+        hearts = new Label("Cards of heart: ");
+        HBox checks = new HBox(10, sumFaces, hearts);
 
-
-        HBox checks = new HBox(10, sums);
 
         VBox layout = new VBox(10, messageLabel, dealButton, checkHandButton, handView, checks);
         layout.setStyle("-fx-padding: 20; -fx-alignment: center;");
@@ -74,6 +73,11 @@ public class GameBoard extends Application {
     }
 
     private void updateHandValues() {
+        StringBuilder heartsAsString = new StringBuilder();
+        for (PlayingCard card : hand.checkHearts()) {
+            heartsAsString.append(card.getAsString()).append(" ");
+        }
+        hearts.setText("Cards of heart: " + heartsAsString);
         sumFaces.setText("Sum of faces: " + hand.checkPoints());
     }
 
