@@ -35,4 +35,13 @@ public class HandOfCards {
         }
         return hearts;
     }
+
+    public boolean checkQueenOfSpades() {
+        for (PlayingCard card : hand) {
+            if (card.getSuit() == 'S' && card.getFace() == 12) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
