@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -19,6 +20,8 @@ public class GameBoard extends Application {
     private HandOfCards hand;
     private Label messageLabel;
     private ListView<String> handView;
+    private Label points;
+    private Label sumFaces;
 
     public static void main(String[] args) {
         launch(args);
@@ -29,15 +32,25 @@ public class GameBoard extends Application {
         deck = new DeckOfCards();
         hand = new HandOfCards();
         messageLabel = new Label("Press 'Deal hand' to draw cards!");
-        handView = new ListView<>(); // Opprett ListView
+        handView = new ListView<>();
+        handView.setPrefSize(300, 150);
 
         Button dealButton = new Button("Deal hand");
         dealButton.setOnAction(e -> dealHand());
 
-        VBox layout = new VBox(10, messageLabel, dealButton, handView);
+        Button checkHandButton = new Button("Check hand");
+        checkHandButton.setOnAction(e -> checkHand());
+
+        sumFaces = new Label("Sum of faces: 0");
+        HBox sums = new HBox(10, sumFaces);
+
+
+        HBox checks = new HBox(10, sums);
+
+        VBox layout = new VBox(10, messageLabel, dealButton, checkHandButton, handView, checks);
         layout.setStyle("-fx-padding: 20; -fx-alignment: center;");
 
-        Scene scene = new Scene(layout, 400, 300);
+        Scene scene = new Scene(layout, 800, 500);
         primaryStage.setTitle("Card Game");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -57,7 +70,14 @@ public class GameBoard extends Application {
             hand.addCard(card);
             handView.getItems().add(card.getAsString());
         }
-
         messageLabel.setText("Your hand has been dealt!");
+    }
+
+    private void updateHandValues() {
+        sumFaces.setText("Sum of faces: " + hand.checkPoints());
+    }
+
+    private void checkHand() {
+    updateHandValues();
     }
 }
