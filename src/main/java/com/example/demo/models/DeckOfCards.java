@@ -20,7 +20,6 @@ public class DeckOfCards {
     public Collection<PlayingCard> dealHand(int numberOfCards) {
         Random random = new Random();
         Set<PlayingCard> hand = new HashSet<>();
-        
         while (hand.size() < numberOfCards) {
             int index = random.nextInt(deck.size());
             hand.add(deck.remove(index));

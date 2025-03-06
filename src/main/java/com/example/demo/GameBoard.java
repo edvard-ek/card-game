@@ -82,12 +82,14 @@ public class GameBoard extends Application {
         }
         if (hand.checkFlush()) {
             flush.setText("Flush: Yes");
+        } else {
+        flush.setText("Flush: No");
         }
         if (hand.checkQueenOfSpades()) {
             spadeQueen.setText("Queen of spades: Yes");
-        }
+        } else {
         spadeQueen.setText("Queen of spades: No");
-        flush.setText("Flush: No");
+        }
         hearts.setText("Cards of heart: " + heartsAsString);
         sumFaces.setText("Sum of faces: " + hand.checkPoints());
     }
