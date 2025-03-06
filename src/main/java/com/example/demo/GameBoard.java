@@ -76,10 +76,9 @@ public class GameBoard extends Application {
     }
 
     private void updateHandValues() {
-        StringBuilder heartsAsString = new StringBuilder();
-        for (PlayingCard card : hand.checkHearts()) {
-            heartsAsString.append(card.getAsString()).append(" ");
-        }
+        String heartsAsString = hand.checkHearts().stream()
+                                    .map(PlayingCard::getAsString)
+                                    .collect(Collectors.joining(" "));
         if (hand.checkFlush()) {
             flush.setText("Flush: Yes");
         } else {

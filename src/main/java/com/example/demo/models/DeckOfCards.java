@@ -10,11 +10,13 @@ public class DeckOfCards {
         this.deck = new ArrayList<>();
 
         char[] suits = {'S', 'H', 'D', 'C'};
-        for (char suit : suits) {
-            for (int face = 1; face <= 13; face++) {
-                deck.add(new PlayingCard(suit, face));
-            }
-        }
+        Arrays.stream(suits)
+              .forEach(suit ->
+                    deck.addAll(
+                        java.util.stream.IntStream.rangeClosed(1, 13)
+                                                    .mapToObj(face -> new PlayingCard(suit, face))
+                                                    .toList()
+                    ));
     }
 
     public Collection<PlayingCard> dealHand(int numberOfCards) {

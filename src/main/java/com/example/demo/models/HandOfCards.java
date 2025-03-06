@@ -2,6 +2,7 @@ package com.example.demo.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
 
 public class HandOfCards {
 
@@ -16,43 +17,26 @@ public class HandOfCards {
     }
 
     public int checkPoints() {
-        int sumPoints = 0;
-        for (PlayingCard card : hand) {
-            sumPoints += card.getFace();
-        }
-        return sumPoints;
+        return hand.stream()
+                    .mapToInt(PlayingCard::getFace)
+                    .sum();
     }
 
-    public ArrayList<PlayingCard> checkHearts() {
-        ArrayList<PlayingCard> hearts = new ArrayList<>();
-        for (PlayingCard card : hand) {
-            if (card.getSuit() == 'H') {
-                hearts.add(card);
-            }
-        }
-        return hearts;
+    public List<PlayingCard> checkHearts() {
+        return hand.stream()
+                    .filter(card -> card.getSuit() == 'H')
+                    .collect(Collectors.toList());
     }
 
     public boolean checkQueenOfSpades() {
-        for (PlayingCard card : hand) {
-            if (card.getSuit() == 'S' && card.getFace() == 12) {
-                return true;
-            }
-        }
-        return false;
+        return hand.stream()
+                    .anyMatch(card -> card.getSuit() == 'S' && card.getFace() == 12);
     }
 
     public boolean checkFlush() {
-       if (hand.size() < 5) {
-           return false;
-       }
-
-       char suit = hand.get(0).getSuit();
-       for (int i = 1; i < hand.size(); i++) {
-           if (hand.get(i).getSuit() != suit) {
-               return false;
-           }
-       }
-       return true;
+        return hand.size() >= 5 && hand.stream()
+                                        .map(PlayingCard::getSuit)
+                                        .distinct()
+                                        .count() == 1;
     }
 }
